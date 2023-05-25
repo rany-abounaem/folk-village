@@ -41,3 +41,12 @@ TagManager:
   - name: Default
     uniqueID: 0
     locked: 0
+  - name: Base
+    uniqueID: 3766830089
+    locked: 0
+  - name: Body
+    uniqueID: 1125266125
+    locked: 0
+  - name: Hat
+    uniqueID: 2873534467
+    locked: 0
