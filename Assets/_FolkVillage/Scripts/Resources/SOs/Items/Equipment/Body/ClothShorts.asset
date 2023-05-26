@@ -18,5 +18,5 @@ MonoBehaviour:
   _quantity: 0
   _price: 2
   _icon: {fileID: -153384170, guid: 4e044626f756e0f48b6f0e45d7011d95, type: 3}
-  _animationDetails: {fileID: 0}
+  _animationDetails: {fileID: 11400000, guid: 2aa6e8df7f3030a49b909252e62d6e96, type: 2}
   _slot: 0

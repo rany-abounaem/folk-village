@@ -14,6 +14,11 @@ namespace FolkVillage.Player
 
         public event VoidCallback OnInventoryUpdate;
 
+        public List<Item> GetItems()
+        {
+            return _items;
+        }
+
         public bool AddItem(Item item)
         {
             if (_items.Count == _capacity)
@@ -35,8 +40,8 @@ namespace FolkVillage.Player
                     }
                 }
             }
-
             _items.Add(item);
+            OnInventoryUpdate?.Invoke();
             return true;
         }
 
@@ -63,6 +68,7 @@ namespace FolkVillage.Player
                         {
                             __item.SetQuantity(__newQuantity);
                         }
+                        OnInventoryUpdate?.Invoke();
                         return true;
                     }
                 }
@@ -82,10 +88,23 @@ namespace FolkVillage.Player
                 if (equipment == _items[__i])
                 {
                     _items.RemoveAt(__i);
+                    OnInventoryUpdate?.Invoke();
                     return true;
                 }
             }
             return false;
+        }
+
+        public Item GetItem (int index)
+        {
+            if (index >= _items.Count)
+            {
+                return null;
+            }
+            else
+            {
+                return _items[index];
+            }
         }
 
     }

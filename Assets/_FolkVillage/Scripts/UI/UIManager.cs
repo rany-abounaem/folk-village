@@ -13,6 +13,7 @@ namespace FolkVillage.UI
         public void Setup(InputControls inputControls, PlayerEntity player)
         {
             _player = player;
+            _inventoryUI.Setup(_player);
 
             inputControls.UI.Inventory.performed += _ =>
             {

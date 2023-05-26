@@ -101,6 +101,12 @@ namespace FolkVillage.Player
 
                 var __baseSprites = _baseSpriteDetails.GetAllSprites(_animatorState, _direction);
 
+
+                if (_currentSpriteIndex >= __baseSprites.Count)
+                {
+                    _currentSpriteIndex = 0;
+                }
+
                 for (var __i = 0; __i < _equipmentSlots.Count; __i++)
                 {
                     var __equipmentSlot = _equipmentSlots[__i];
@@ -110,11 +116,10 @@ namespace FolkVillage.Player
                         var __currentEquipmentSlotSprite = __equipmentSlotSprites[_currentSpriteIndex];
                         _equipmentRenderers[__i].sprite = __currentEquipmentSlotSprite;
                     }
-                }
-
-                if (_currentSpriteIndex >= __baseSprites.Count)
-                {
-                    _currentSpriteIndex = 0;
+                    else
+                    {
+                        _equipmentRenderers[__i].sprite = null;
+                    }
                 }
 
                 _baseRenderer.sprite = __baseSprites[_currentSpriteIndex];
