@@ -10,7 +10,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 52ef4e77bc5d5eb469c4db0640741339, type: 3}
-  m_Name: BaseAnimation
+  m_Name: AD_Base
   m_EditorClassIdentifier: 
   _typeAndDirectionBasedSprites:
   - _directionBasedSprites:

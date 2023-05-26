@@ -4,7 +4,7 @@ using FolkVillage.Animation;
 using System;
 using FolkVillage.Items;
 
-// Should be a parent class and states will inherit that
+// Should be a parent class and states would inherit that parent class
 public enum AnimatorState
 {
     Idle = 0,

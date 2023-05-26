@@ -1,0 +1,22 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: eee458275cab6d24cb7c5eb5b6546c61, type: 3}
+  m_Name: GlacierArmor
+  m_EditorClassIdentifier: 
+  _itemName: Glacier Armor
+  _description: Armor crafted by the legends of the depths.
+  _stackable: 0
+  _quantity: 0
+  _price: 25
+  _icon: {fileID: 445037544, guid: cc7a567bc4006d448b479af3eccf30e3, type: 3}
+  _animationDetails: {fileID: 0}
+  _slot: 0
