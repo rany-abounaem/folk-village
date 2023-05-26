@@ -133,9 +133,9 @@
             "id": "32c1220c-d3de-4dbf-85d3-22c02a343e1b",
             "actions": [
                 {
-                    "name": "New action",
+                    "name": "Inventory",
                     "type": "Button",
-                    "id": "3092d86b-4143-4cf2-95cc-f721d27c7b56",
+                    "id": "76938d19-fafa-424e-828d-168c20d24370",
                     "expectedControlType": "Button",
                     "processors": "",
                     "interactions": "",
@@ -145,12 +145,12 @@
             "bindings": [
                 {
                     "name": "",
-                    "id": "fda60e5e-4e31-44e8-9e4d-5d19b7232cfb",
-                    "path": "",
+                    "id": "1ce742db-8a6a-4b1d-a248-103fea704727",
+                    "path": "<Keyboard>/i",
                     "interactions": "",
                     "processors": "",
                     "groups": "",
-                    "action": "New action",
+                    "action": "Inventory",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }

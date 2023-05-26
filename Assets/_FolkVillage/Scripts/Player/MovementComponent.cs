@@ -12,9 +12,12 @@ namespace FolkVillage.Player
 
         private Vector2 _movementInput;
 
-        public void Setup(AnimatorComponent animator)
+        private Rigidbody2D _rigidbody;
+
+        public void Setup(AnimatorComponent animator, Rigidbody2D rigidbody)
         {
             _animator = animator;
+            _rigidbody = rigidbody;
         }
         public void SetMovementInput(Vector2 movementInput)
         {
@@ -34,9 +37,10 @@ namespace FolkVillage.Player
 
         }
 
-        private void Update()
+        private void FixedUpdate()
         {
-            gameObject.transform.Translate(_movementSpeed * Time.deltaTime * _movementInput);
+            _rigidbody.AddForce(_movementInput * _movementSpeed);
+            //gameObject.transform.Translate(_movementSpeed * Time.deltaTime * _movementInput);
         }
     }
 }

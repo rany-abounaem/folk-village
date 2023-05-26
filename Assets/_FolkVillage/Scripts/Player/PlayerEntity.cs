@@ -17,16 +17,18 @@ namespace FolkVillage.Player
         public InventoryComponent Inventory { get; private set; }
         public EquipmentComponent Equipment { get; private set; }
         public AnimatorComponent Animator { get; private set; }
+        public Rigidbody2D Rigidbody { get; private set; }
 
         public void Setup()
         {
+            Rigidbody = GetComponent<Rigidbody2D>();
             Inventory = GetComponent<InventoryComponent>();
             Equipment = GetComponent<EquipmentComponent>();
             Equipment.Setup(Inventory);
             Animator = GetComponent<AnimatorComponent>();
             Animator.Setup(Equipment.GetEquipmentSlots());
             Movement = GetComponent<MovementComponent>();
-            Movement.Setup(Animator);
+            Movement.Setup(Animator, Rigidbody);
 
         }
     }

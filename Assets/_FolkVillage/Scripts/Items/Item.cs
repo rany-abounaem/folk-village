@@ -5,7 +5,7 @@ namespace FolkVillage.Items
     public delegate void IntCallback(int value);
 
     [CreateAssetMenu(fileName = "Item", menuName = "ScriptableObjects/Items/Item")]
-    public class Item : ScriptableObject
+    public class Item : ScriptableObject, ISlottable
     {
         [SerializeField]
         private string _itemName;

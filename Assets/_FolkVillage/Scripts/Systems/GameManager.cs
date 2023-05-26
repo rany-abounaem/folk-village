@@ -1,5 +1,6 @@
 using FolkVillage.Input;
 using FolkVillage.Player;
+using FolkVillage.UI;
 using UnityEngine;
 
 namespace FolkVillage.Systems
@@ -10,6 +11,8 @@ namespace FolkVillage.Systems
         private InputManager _inputManager;
         [SerializeField]
         private PlayerController _playerController;
+        [SerializeField]
+        private UIManager _UIManager;
         [SerializeField]
         private GameObject _player;
 
@@ -25,12 +28,11 @@ namespace FolkVillage.Systems
             var __playerEntity = _player.GetComponent<PlayerEntity>();
             __playerEntity.Setup();
 
+            // Initialize UI
+            _UIManager.Setup(_controls, __playerEntity);
+
             // Assigning player to player controller (if the user can play with more than one character)
             _playerController.Setup(_controls, __playerEntity);
-        }
-
-        void Update()
-        {
 
         }
     }

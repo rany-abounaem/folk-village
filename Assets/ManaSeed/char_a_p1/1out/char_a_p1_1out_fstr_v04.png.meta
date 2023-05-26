@@ -33,7 +33,7 @@ TextureImporter:
   maxTextureSize: 2048
   textureSettings:
     serializedVersion: 2
-    filterMode: 1
+    filterMode: 0
     aniso: 1
     mipBias: 0
     wrapU: 1
@@ -1491,8 +1491,8 @@ TextureImporter:
       char_a_p1_1out_fstr_v04_walk_left_2: -58937690
       char_a_p1_1out_fstr_v04_walk_right_2: 849456917
       char_a_p1_1out_fstr_v04_walk_right_1: 135338641
-      char_a_p1_1out_fstr_v04_10: 1630905754
       char_a_p1_1out_fstr_v04_walk_right_5: 55225309
+      char_a_p1_1out_fstr_v04_10: 1630905754
       char_a_p1_1out_fstr_v04_2: 708023240
       char_a_p1_1out_fstr_v04_18: -126030760
       char_a_p1_1out_fstr_v04_62: 1848018066
