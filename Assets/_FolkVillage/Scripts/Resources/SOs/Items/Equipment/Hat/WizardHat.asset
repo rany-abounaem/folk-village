@@ -10,13 +10,14 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 82e7a8005329bf044bbddb26febb98f9, type: 3}
-  m_Name: Hat
+  m_Name: WizardHat
   m_EditorClassIdentifier: 
-  _itemName: 
-  _description: 
+  _itemName: Wizard Hat
+  _description: Wizards are known to wear this hat. It is believed it gives them
+    magic powers.
   _stackable: 0
   _quantity: 0
-  _price: 0
-  _icon: {fileID: 0}
-  _animationDetails: {fileID: 0}
+  _price: 30
+  _icon: {fileID: -819106779, guid: 6beb4dc0801fa7b419c98d0470a68f65, type: 3}
+  _animationDetails: {fileID: 11400000, guid: ab6848b61e3cdf1489b00e050fc25570, type: 2}
   _slot: 1
