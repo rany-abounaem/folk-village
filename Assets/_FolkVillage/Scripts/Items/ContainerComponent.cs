@@ -7,9 +7,9 @@ namespace FolkVillage.Items
     public class ContainerComponent : MonoBehaviour
     {
         [SerializeField]
-        private int _capacity;
+        protected int _capacity;
         [SerializeField]
-        private List<Item> _items;
+        protected List<Item> _items;
 
         public event VoidCallback OnContainerUpdate;
 
@@ -24,67 +24,28 @@ namespace FolkVillage.Items
             {
                 return false;
             }
-
-            // If the item is stackable, search for an item with the same name
-            if (item.IsStackable())
-            {
-                foreach (var __item in _items)
-                {
-                    if (__item.GetName() == item.GetName())
-                    {
-                        var __oldQuantity = __item.GetQuantity();
-                        __item.SetQuantity(__oldQuantity + item.GetQuantity());
-                        OnContainerUpdate?.Invoke();
-                        return true;
-                    }
-                }
-            }
+            
             _items.Add(item);
             OnContainerUpdate?.Invoke();
             return true;
         }
 
-        public bool RemoveItem(int index, int quantity = 0)
+        public bool RemoveItem(int index)
         {
             if (_items.Count > index)
             {
-                if (quantity != 0)
-                {
-                    var __item = _items[index];
-                    var __oldQuantity = __item.GetQuantity();
-
-                    // Player does not have enough quantity of that item
-                    if (__oldQuantity < quantity)
-                        return false;
-                    else
-                    {
-                        var __newQuantity = __oldQuantity - quantity;
-                        if (__newQuantity == 0)
-                        {
-                            _items.RemoveAt(index);
-                        }
-                        else
-                        {
-                            __item.SetQuantity(__newQuantity);
-                        }
-                        OnContainerUpdate?.Invoke();
-                        return true;
-                    }
-                }
-                else
-                {
-                    _items.RemoveAt(index);
-                    return true;
-                }
+                _items.RemoveAt(index);
+                OnContainerUpdate?.Invoke();
+                return true;
             }
             return false;
         }
 
-        public bool RemoveItem(Equipment equipment)
+        public bool RemoveItem(Item item)
         {
             for (var __i = 0; __i < _items.Count; __i++)
             {
-                if (equipment == _items[__i])
+                if (item == _items[__i])
                 {
                     _items.RemoveAt(__i);
                     OnContainerUpdate?.Invoke();

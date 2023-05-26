@@ -1,6 +1,7 @@
 using FolkVillage.Player;
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 
 namespace FolkVillage.UI
@@ -12,6 +13,9 @@ namespace FolkVillage.UI
 
         [SerializeField]
         private List<EquipmentSlotUI> _equipmentSlots;
+
+        [SerializeField]
+        private TextMeshProUGUI _currencyText;
 
         private InventoryComponent _inventory;
         private EquipmentComponent _equipment;
@@ -37,6 +41,7 @@ namespace FolkVillage.UI
             Refresh();
 
             _inventory.OnContainerUpdate += RefreshInventory;
+            _inventory.OnMoneyUpdate += RefreshCurrencyText;
             _equipment.OnEquipmentUpdate += RefreshEquipment;
         }
 
@@ -72,6 +77,11 @@ namespace FolkVillage.UI
                 }
                 _equipmentSlots[__i].UpdateSlot(__equipmentItems[__i]);
             }
+        }
+
+        private void RefreshCurrencyText(int money)
+        {
+            _currencyText.text = money.ToString();
         }
 
         private void TryEquip(int index)

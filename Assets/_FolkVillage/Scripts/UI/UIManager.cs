@@ -16,20 +16,21 @@ namespace FolkVillage.UI
 
         private PlayerEntity _player;
 
-        public void Setup(InputControls inputControls, PlayerEntity player, List<Shop> shops)
+        public void Setup(InputControls inputControls, PlayerEntity player, List<ShopEntity> shops)
         {
             _player = player;
             _inventoryUI.Setup(_player);
 
             foreach (var __shop in shops)
             {
-                Debug.Log("helped");
                 __shop.OnShopEntered += () =>
                 {
                     HandleShopEntered(__shop);
                 };
 
-                __shop.OnShopExit += HandleShopExit;
+                __shop.OnShopExit += () => {
+                    HandleShopExit();
+                }; ;
             }
 
             inputControls.UI.Inventory.performed += _ =>
@@ -68,7 +69,7 @@ namespace FolkVillage.UI
             _currentActivePanel = panel;
         }
 
-        private void HandleShopEntered(Shop shop)
+        private void HandleShopEntered(ShopEntity shop)
         {
             _shopUI.Setup(_player, shop);
             OpenPanel(_shopUI);
@@ -78,6 +79,7 @@ namespace FolkVillage.UI
         {
             if (_currentActivePanel == _shopUI)
             {
+                _shopUI.Unsubscribe();
                 CloseCurrentPanel();
             }
         }

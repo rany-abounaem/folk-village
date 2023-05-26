@@ -18,7 +18,7 @@ namespace FolkVillage.Systems
         [SerializeField]
         private GameObject _player;
         [SerializeField]
-        private List<Shop> _shops;
+        private List<ShopEntity> _shops;
 
         private InputControls _controls;
 
@@ -35,7 +35,7 @@ namespace FolkVillage.Systems
             // Setup shops
             foreach (var __shop in _shops)
             {
-                __shop.Setup();
+                __shop.Setup(__playerEntity.Inventory);
             }
 
             // Initialize UI

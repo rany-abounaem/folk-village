@@ -1,66 +1,103 @@
+using FolkVillage.Items;
 using FolkVillage.Player;
 using FolkVillage.Shops;
+using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
+using UnityEngine.UI;
 
 namespace FolkVillage.UI
 {
     public class ShopUI : UIPanel
     {
-        private InventoryComponent _inventory;
-
+        [SerializeField]
+        private List<SlotUI> _shopContainerSlots;
+        [SerializeField]
+        private List<SlotUI> _inventorySlots;
+        [SerializeField]
+        private TextMeshProUGUI _playerMoney;
         [SerializeField]
         private TextMeshProUGUI _welcomeText;
 
-        public void Setup(PlayerEntity player, Shop shop)
-        {            
-            //for (var __i = 0; __i < _inventorySlots.Count; __i++)
-            //{
-            //    _inventorySlots[__i].Setup(__i);
-            //    _inventorySlots[__i].OnSlotClick += TryEquip;
-            //}
+
+        [SerializeField]
+        private Image _shopKeepersImage;
+
+        private ContainerComponent _shopContainer;
+        private InventoryComponent _inventory;
+
+        public void Setup(PlayerEntity player, ShopEntity shop)
+        {
+            for (var __i = 0; __i < _shopContainerSlots.Count; __i++)
+            {
+                _shopContainerSlots[__i].Setup(__i);
+                _shopContainerSlots[__i].OnSlotClick += (index) => shop.BuyItemFromShop(index);
+            }
+
+            for (var __i = 0; __i < _inventorySlots.Count; __i++)
+            {
+                _inventorySlots[__i].Setup(__i);
+                _inventorySlots[__i].OnSlotClick += (index) => shop.SellItemToShop(index);
+            }
 
             _inventory = player.Inventory;
+            _playerMoney.text = _inventory.GetMoney().ToString();
+            _shopContainer = shop.GetShopContainer();
             _welcomeText.text = shop.GetWelcomeDialogue();
+            _shopKeepersImage.sprite = shop.GetShopkeerImage();
 
             Refresh();
 
-            _inventory.OnContainerUpdate += RefreshInventory;
-            //_equipment.OnEquipmentUpdate += RefreshEquipment;
+            shop.OnShopTransaction += Refresh;
+        }
+
+        public void Unsubscribe()
+        {
+            for (var __i = 0; __i < _shopContainerSlots.Count; __i++)
+            {
+                _shopContainerSlots[__i].Unsubscribe();
+            }
+
+            for (var __i = 0; __i < _inventorySlots.Count; __i++)
+            {
+                _inventorySlots[__i].Unsubscribe();
+            }
         }
 
         public void Refresh()
         {
-            RefreshInventory();
-            RefreshEquipment();
+            RefreshShopContainer();
+            RefreshPlayerInventory();
         }
 
-        private void RefreshInventory()
+        private void RefreshShopContainer()
+        {
+            var __shopContainerItems = _shopContainer.GetItems();
+            
+            for (var __i = 0; __i < _shopContainerSlots.Count; __i++)
+            {
+                if (__i >= __shopContainerItems.Count)
+                {
+                    _shopContainerSlots[__i].UpdateSlot(null);
+                    continue;
+                }
+                _shopContainerSlots[__i].UpdateSlot(__shopContainerItems[__i]);
+            }
+        }
+
+        private void RefreshPlayerInventory()
         {
             var __inventoryItems = _inventory.GetItems();
-            //for (var __i = 0; __i < _inventorySlots.Count; __i++)
-            //{
-            //    if (__i >= __inventoryItems.Count)
-            //    {
-            //        _inventorySlots[__i].UpdateSlot(null);
-            //        continue;
-            //    }
-            //    _inventorySlots[__i].UpdateSlot(__inventoryItems[__i]);
-            //}
-        }
-
-        private void RefreshEquipment()
-        {
-            //var __equipmentItems = _equipment.GetEquipmentSlots();
-            //for (var __i = 0; __i < _equipmentSlots.Count; __i++)
-            //{
-            //    if (__i >= __equipmentItems.Count)
-            //    {
-            //        _equipmentSlots[__i].UpdateSlot(null);
-            //        continue;
-            //    }
-            //    _equipmentSlots[__i].UpdateSlot(__equipmentItems[__i]);
-            //}
+            for (var __i = 0; __i < _inventorySlots.Count; __i++)
+            {
+                if (__i >= __inventoryItems.Count)
+                {
+                    _inventorySlots[__i].UpdateSlot(null);
+                    continue;
+                }
+                _inventorySlots[__i].UpdateSlot(__inventoryItems[__i]);
+            }
+            _playerMoney.text = _inventory.GetMoney().ToString();
         }
     }
 }

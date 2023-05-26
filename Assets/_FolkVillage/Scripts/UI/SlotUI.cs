@@ -39,6 +39,11 @@ namespace FolkVillage.UI
                 _slotImage.sprite = _defaultSprite;
             }
         }
+
+        public void Unsubscribe()
+        {
+            OnSlotClick = null;
+        }
     }
 }
 

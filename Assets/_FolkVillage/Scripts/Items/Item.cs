@@ -14,13 +14,9 @@ namespace FolkVillage.Items
         [SerializeField]
         private bool _stackable;
         [SerializeField]
-        private int _quantity;
-        [SerializeField]
-        private float _price;
+        private int _price;
         [SerializeField]
         private Sprite _icon;
-
-        public event IntCallback OnQuantityUpdate;
 
         public string GetName()
         {
@@ -32,12 +28,7 @@ namespace FolkVillage.Items
             return _description;
         }
 
-        public int GetQuantity()
-        {
-            return _quantity;
-        }
-
-        public float GetPrice()
+        public int GetPrice()
         {
             return _price;
         }
@@ -45,12 +36,6 @@ namespace FolkVillage.Items
         public Sprite GetIcon()
         {
             return _icon;
-        }
-
-        public void SetQuantity(int quantity)
-        {
-            _quantity = quantity;
-            OnQuantityUpdate?.Invoke(_quantity);
         }
 
         public bool IsStackable()
