@@ -5,6 +5,8 @@ namespace FolkVillage.UI
 {
     public class UIManager : MonoBehaviour
     {
+        private UIPanel _currentActivePanel;
+
         [SerializeField]
         private InventoryUI _inventoryUI;
 
@@ -23,7 +25,22 @@ namespace FolkVillage.UI
 
         public void ToggleUIPanel(UIPanel panel)
         {
-            panel.gameObject.SetActive(!panel.gameObject.activeSelf);
+            var __panelGameObject = panel.gameObject;
+
+            if (!__panelGameObject.activeSelf)
+            {
+                if (_currentActivePanel != null)
+                {
+                    _currentActivePanel.gameObject.SetActive(false);
+                }
+                __panelGameObject.SetActive(true);
+                _currentActivePanel = panel;
+            }
+            else
+            {
+                __panelGameObject.SetActive(false);
+                _currentActivePanel = null;
+            }
         }
     }
 }

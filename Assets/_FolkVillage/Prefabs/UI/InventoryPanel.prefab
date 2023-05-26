@@ -231,7 +231,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &8714159970705556799
 RectTransform:
   m_ObjectHideFlags: 0
@@ -793,6 +793,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: InventorySlot
       objectReference: {fileID: 0}
+    - target: {fileID: 9055239389349098670, guid: b6b11c50dd70d4b4aa895c054c5b394c, type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: -153384170, guid: 4e044626f756e0f48b6f0e45d7011d95, type: 3}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: b6b11c50dd70d4b4aa895c054c5b394c, type: 3}
 --- !u!114 &7074134324268125674 stripped
@@ -1358,6 +1362,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: InventorySlot (2)
       objectReference: {fileID: 0}
+    - target: {fileID: 9055239389349098670, guid: b6b11c50dd70d4b4aa895c054c5b394c, type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: -819106779, guid: 6beb4dc0801fa7b419c98d0470a68f65, type: 3}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: b6b11c50dd70d4b4aa895c054c5b394c, type: 3}
 --- !u!224 &3786536199224424193 stripped
@@ -1471,6 +1479,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: InventorySlot (1)
       objectReference: {fileID: 0}
+    - target: {fileID: 9055239389349098670, guid: b6b11c50dd70d4b4aa895c054c5b394c, type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 445037544, guid: cc7a567bc4006d448b479af3eccf30e3, type: 3}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: b6b11c50dd70d4b4aa895c054c5b394c, type: 3}
 --- !u!224 &3786536197194514709 stripped

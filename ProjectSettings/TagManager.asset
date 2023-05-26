@@ -56,6 +56,9 @@ TagManager:
   - name: Hat
     uniqueID: 2873534467
     locked: 0
+  - name: Buildings
+    uniqueID: 1069810103
+    locked: 0
   - name: Tree
     uniqueID: 3239782833
     locked: 0
