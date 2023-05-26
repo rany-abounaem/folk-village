@@ -77,6 +77,8 @@ namespace FolkVillage.Player
         }
         public bool DeEquip(int index)
         {
+            if (_equipment[index] == null)
+                return false;
             if (_inventory.AddItem(_equipment[index]))
             {
                 _equipment[index] = null;
