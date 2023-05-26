@@ -36,7 +36,7 @@ namespace FolkVillage.UI
 
             Refresh();
 
-            _inventory.OnInventoryUpdate += RefreshInventory;
+            _inventory.OnContainerUpdate += RefreshInventory;
             _equipment.OnEquipmentUpdate += RefreshEquipment;
         }
 
@@ -88,6 +88,11 @@ namespace FolkVillage.UI
             {
                 Debug.Log("Deequipped");
             }
+        }
+
+        private void OnEnable()
+        {
+            Refresh();
         }
     }
 }

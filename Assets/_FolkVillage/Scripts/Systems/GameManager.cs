@@ -1,6 +1,8 @@
 using FolkVillage.Input;
 using FolkVillage.Player;
+using FolkVillage.Shops;
 using FolkVillage.UI;
+using System.Collections.Generic;
 using UnityEngine;
 
 namespace FolkVillage.Systems
@@ -15,6 +17,8 @@ namespace FolkVillage.Systems
         private UIManager _UIManager;
         [SerializeField]
         private GameObject _player;
+        [SerializeField]
+        private List<Shop> _shops;
 
         private InputControls _controls;
 
@@ -28,12 +32,17 @@ namespace FolkVillage.Systems
             var __playerEntity = _player.GetComponent<PlayerEntity>();
             __playerEntity.Setup();
 
+            // Setup shops
+            foreach (var __shop in _shops)
+            {
+                __shop.Setup();
+            }
+
             // Initialize UI
-            _UIManager.Setup(_controls, __playerEntity);
+            _UIManager.Setup(_controls, __playerEntity, _shops);
 
             // Assigning player to player controller (if the user can play with more than one character)
             _playerController.Setup(_controls, __playerEntity);
-
         }
     }
 }
