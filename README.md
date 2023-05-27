@@ -1,7 +1,7 @@
 # Folk Village
 
 ## Thought Process
-(*Note: During the whole thought process the thought of creating modular systems and trying to follow design patterns for everything keeps kicking in)
+(Note: During the whole thought process the thought of creating modular systems and trying to follow design patterns for everything keeps kicking in)
 - I started with the input and the input manager which is a Scriptable Object that can be attached to any Game Object that wants to listen for input.
 - After that I created character movement. I wanted something simple so I went for Transform.Translate taking movement input and speed, normalized by deltatime as parameters at the beginning.
 - Animated the base character sprite (without clothes/equipment) using Unity's built-in Animator & Blend trees for Idle & Walk animations in the 4 directions.
