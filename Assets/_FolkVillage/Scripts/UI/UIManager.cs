@@ -60,6 +60,11 @@ namespace FolkVillage.UI
 
         }
 
+        public void Tick(float delta)
+        {
+            _shopUI.Tick(delta);
+        }
+
         private void CloseCurrentPanel()
         {
             if (_currentActivePanel != null)

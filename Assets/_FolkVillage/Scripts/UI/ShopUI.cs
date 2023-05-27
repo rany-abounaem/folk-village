@@ -4,7 +4,9 @@ using FolkVillage.Shops;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
+using UnityEngine.InputSystem;
 using UnityEngine.UI;
+using static UnityEditor.Progress;
 
 namespace FolkVillage.UI
 {
@@ -18,6 +20,9 @@ namespace FolkVillage.UI
         private TextMeshProUGUI _playerMoney;
         [SerializeField]
         private TextMeshProUGUI _welcomeText;
+        [SerializeField]
+        private TooltipUI _tooltip;
+
 
 
         [SerializeField]
@@ -28,27 +33,59 @@ namespace FolkVillage.UI
 
         public void Setup(PlayerEntity player, ShopEntity shop)
         {
-            for (var __i = 0; __i < _shopContainerSlots.Count; __i++)
-            {
-                _shopContainerSlots[__i].Setup(__i);
-                _shopContainerSlots[__i].OnSlotClick += (index) => shop.BuyItemFromShop(index);
-            }
-
-            for (var __i = 0; __i < _inventorySlots.Count; __i++)
-            {
-                _inventorySlots[__i].Setup(__i);
-                _inventorySlots[__i].OnSlotClick += (index) => shop.SellItemToShop(index);
-            }
-
             _inventory = player.Inventory;
             _playerMoney.text = _inventory.GetMoney().ToString();
             _shopContainer = shop.GetShopContainer();
             _welcomeText.text = shop.GetWelcomeDialogue();
             _shopKeepersImage.sprite = shop.GetShopkeerImage();
 
+
+            for (var __i = 0; __i < _shopContainerSlots.Count; __i++)
+            {
+                _shopContainerSlots[__i].Setup(__i);
+                _shopContainerSlots[__i].OnSlotClick += (index) => shop.BuyItemFromShop(index);
+                _shopContainerSlots[__i].OnSlotPointerEnter += (index) => 
+                {
+                    var __item = _shopContainer.GetItem(index);
+                    if (__item == null)
+                    {
+                        return;
+                    }
+                    ShowTooltip("Price: " + __item.GetPrice()); 
+                };
+                _shopContainerSlots[__i].OnSlotPointerExit += (index) => { HideTooltip();  };
+            }
+
+            for (var __i = 0; __i < _inventorySlots.Count; __i++)
+            {
+                _inventorySlots[__i].Setup(__i);
+                _inventorySlots[__i].OnSlotClick += (index) => shop.SellItemToShop(index);
+                _inventorySlots[__i].OnSlotPointerEnter += (index) =>
+                {
+                    var __item = _inventory.GetItem(index);
+                    if (__item == null)
+                    {
+                        return;
+                    }
+                    ShowTooltip("Price: " + __item.GetPrice());
+                };
+                _inventorySlots[__i].OnSlotPointerExit += (index) => { HideTooltip();  };
+            }
+
             Refresh();
 
             shop.OnShopTransaction += Refresh;
+        }
+
+        private void ShowTooltip(string s)
+        {
+            _tooltip.gameObject.SetActive(true);
+            _tooltip.UpdateTooltip(s);
+        }
+
+        private void HideTooltip()
+        {
+            _tooltip.gameObject.SetActive(false);
         }
 
         public void Unsubscribe()
@@ -104,6 +141,15 @@ namespace FolkVillage.UI
         {
             base.Close();
             Unsubscribe();
+        }
+
+        public void Tick(float delta)
+        {
+            if (_tooltip.gameObject.activeSelf)
+            {
+                var __rectTransform = (RectTransform)_tooltip.transform;
+                _tooltip.transform.position = Mouse.current.position.ReadValue() + new Vector2(__rectTransform.rect.width/2, __rectTransform.rect.height/2);
+            }
         }
 
     }

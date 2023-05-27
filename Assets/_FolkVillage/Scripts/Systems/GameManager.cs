@@ -3,6 +3,7 @@ using FolkVillage.Player;
 using FolkVillage.Shops;
 using FolkVillage.UI;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 
 namespace FolkVillage.Systems
@@ -43,6 +44,11 @@ namespace FolkVillage.Systems
 
             // Assigning player to player controller (if the user can play with more than one character)
             _playerController.Setup(_controls, __playerEntity);
+        }
+
+        private void Update()
+        {
+            _UIManager.Tick(Time.deltaTime);
         }
     }
 }

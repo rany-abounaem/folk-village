@@ -5,7 +5,7 @@ using UnityEngine.UI;
 
 namespace FolkVillage.UI
 {
-    public abstract class SlotUI : MonoBehaviour, IPointerClickHandler
+    public abstract class SlotUI : MonoBehaviour, IPointerClickHandler, IPointerEnterHandler, IPointerExitHandler
     {
         private int _slotIndex;
         [SerializeField]
@@ -15,6 +15,8 @@ namespace FolkVillage.UI
         private ISlottable _slottable;
 
         public event IntCallback OnSlotClick;
+        public event IntCallback OnSlotPointerEnter;
+        public event IntCallback OnSlotPointerExit;
         public virtual void OnPointerClick(PointerEventData eventData)
         {
             OnSlotClick?.Invoke(_slotIndex);
@@ -43,6 +45,18 @@ namespace FolkVillage.UI
         public void Unsubscribe()
         {
             OnSlotClick = null;
+            OnSlotPointerEnter = null;
+            OnSlotPointerExit = null;
+        }
+
+        public void OnPointerEnter(PointerEventData eventData)
+        {
+            OnSlotPointerEnter?.Invoke(_slotIndex);
+        }
+
+        public void OnPointerExit(PointerEventData eventData)
+        {
+            OnSlotPointerExit?.Invoke(_slotIndex); ;
         }
     }
 }
