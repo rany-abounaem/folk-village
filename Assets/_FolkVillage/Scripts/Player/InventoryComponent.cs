@@ -1,4 +1,6 @@
 using FolkVillage.Items;
+using FolkVillage.UI;
+using UnityEngine;
 
 namespace FolkVillage.Player
 {

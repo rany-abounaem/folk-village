@@ -99,6 +99,13 @@ namespace FolkVillage.UI
             }
             _playerMoney.text = _inventory.GetMoney().ToString();
         }
+
+        public override void Close()
+        {
+            base.Close();
+            Unsubscribe();
+        }
+
     }
 }
 

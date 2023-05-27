@@ -3,6 +3,7 @@ using UnityEngine;
 using FolkVillage.Animation;
 using System;
 using FolkVillage.Items;
+using FolkVillage.Audio;
 
 // Should be a parent class and states would inherit that parent class
 public enum AnimatorState
@@ -55,8 +56,8 @@ namespace FolkVillage.Player
         private Vector2 _movement;
         private PlayerDirection _direction;
         private int _currentFrame = 0;
-        private int _currentSpriteIndex = 0;
-        private int _framesPerSprite = 60;
+        private float _frameDuration = 0.1f;
+        private float _timer = 0;
 
         public void Setup(List<Equipment> equipment)
         {
@@ -92,19 +93,24 @@ namespace FolkVillage.Player
 
         private void Update()
         {
-            _currentFrame++;
+            _timer += Time.deltaTime;
 
-            if (_currentFrame >= _framesPerSprite)
+            if (_timer > _frameDuration)
             {
-                _currentFrame = 0;
-                _currentSpriteIndex++;
+                _timer -= _frameDuration;
 
                 var __baseSprites = _baseSpriteDetails.GetAllSprites(_animatorState, _direction);
 
+                _currentFrame = (_currentFrame + 1) % __baseSprites.Count;
 
-                if (_currentSpriteIndex >= __baseSprites.Count)
+                if (_currentFrame % 3 == 0)
                 {
-                    _currentSpriteIndex = 0;
+                    if (_animatorState != AnimatorState.Idle)
+                    {
+                        var _random = UnityEngine.Random.Range(0, 3);
+                        var _footStep = _random == 0 ? "Foot_Step1" : _random == 1 ? "Foot_Step2" : "Foot_Step3";
+                        AudioManager.instance.Play(_footStep);
+                    }
                 }
 
                 for (var __i = 0; __i < _equipmentSlots.Count; __i++)
@@ -113,7 +119,7 @@ namespace FolkVillage.Player
                     if (_equipmentSlots[__i] != null)
                     {
                         var __equipmentSlotSprites = __equipmentSlot.GetAnimationDetials().GetAllSprites(_animatorState, _direction);
-                        var __currentEquipmentSlotSprite = __equipmentSlotSprites[_currentSpriteIndex];
+                        var __currentEquipmentSlotSprite = __equipmentSlotSprites[_currentFrame];
                         _equipmentRenderers[__i].sprite = __currentEquipmentSlotSprite;
                     }
                     else
@@ -122,8 +128,9 @@ namespace FolkVillage.Player
                     }
                 }
 
-                _baseRenderer.sprite = __baseSprites[_currentSpriteIndex];
-            } 
+                _baseRenderer.sprite = __baseSprites[_currentFrame];
+            }
+                
         }
     }
 }

@@ -1,7 +1,8 @@
 using FolkVillage.Items;
 using FolkVillage.Player;
-using System.Collections.Generic;
+using FolkVillage.Audio;
 using UnityEngine;
+using FolkVillage.UI;
 
 namespace FolkVillage.Shops
 {
@@ -17,6 +18,9 @@ namespace FolkVillage.Shops
 
         private ContainerComponent _shopContainer;
         private InventoryComponent _playerInventory;
+
+        [SerializeField]
+        private PopupEventChannel _popupEventChannel;
 
         public void Setup(InventoryComponent inventory)
         {
@@ -56,34 +60,47 @@ namespace FolkVillage.Shops
             Debug.Log("Buy Item at Index " + index);
             var __item = _shopContainer.GetItem(index);
             if (__item == null) { return false; }
+            var __playerHasMoney = true;
             if (_playerInventory.AddItem(__item))
             {
                 if (_playerInventory.RemoveMoney(__item.GetPrice()))
                 {
                     _shopContainer.RemoveItem(__item);
                     OnShopTransaction?.Invoke();
+                    AudioManager.instance.Play("Buy");
                     return true;
                 }
                 else
                 {
+                    __playerHasMoney = false;
                     _playerInventory.RemoveItem(__item);
                 }
             }
+            if (__playerHasMoney)
+            {
+                _popupEventChannel.Raise("Please free your inventory!");
+            }
+            else
+            {
+                _popupEventChannel.Raise("You do not have enough money!");
+            }
+            
             return false;
         }
 
         public bool SellItemToShop(int index)
         {
-            Debug.Log("Sell Item at Index " + index);
             var __item = _playerInventory.GetItem(index);
             if (__item == null) { return false; }
             if (_shopContainer.AddItem(__item))
             {
                 _playerInventory.AddMoney(__item.GetPrice());
                 _playerInventory.RemoveItem(__item);
+                AudioManager.instance.Play("Sell");
                 OnShopTransaction?.Invoke();
                 return true;
             }
+            _popupEventChannel.Raise("Shop is full");
             return false;
         }
 

@@ -1,6 +1,9 @@
+using FolkVillage.Audio;
 using FolkVillage.Player;
 using FolkVillage.Shops;
+using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 
 namespace FolkVillage.UI
@@ -13,6 +16,12 @@ namespace FolkVillage.UI
         private InventoryUI _inventoryUI;
         [SerializeField]
         private ShopUI _shopUI;
+
+        [SerializeField]
+        private PopupEventChannel _popupEventChannel;
+        [SerializeField]
+        private TextMeshProUGUI _popupText;
+        private Coroutine _popupCoroutine;
 
         private PlayerEntity _player;
 
@@ -37,6 +46,18 @@ namespace FolkVillage.UI
             {
                 ToggleUIPanel(_inventoryUI);
             };
+
+            _popupEventChannel.OnStringUpdate += (s) =>
+            {
+                if (_popupCoroutine != null)
+                {
+                    StopCoroutine(_popupCoroutine);
+                    _popupCoroutine = null;
+                }
+                StartCoroutine(PopupCoroutine(s));
+            };
+
+
         }
 
         private void CloseCurrentPanel()
@@ -44,6 +65,7 @@ namespace FolkVillage.UI
             if (_currentActivePanel != null)
             {
                 _currentActivePanel.gameObject.SetActive(false);
+                _currentActivePanel.Close();
                 _currentActivePanel = null;
             }
         }
@@ -79,9 +101,26 @@ namespace FolkVillage.UI
         {
             if (_currentActivePanel == _shopUI)
             {
-                _shopUI.Unsubscribe();
                 CloseCurrentPanel();
             }
+        }
+
+        public void ShowPopup(string s)
+        {
+            _popupText.gameObject.SetActive(true);
+            _popupText.text = s;
+        }
+
+        public void HidePopup()
+        {
+            _popupText.gameObject.SetActive(false);
+        }
+
+        private IEnumerator PopupCoroutine(string s)
+        {
+            ShowPopup(s);
+            yield return new WaitForSeconds(1.5f);
+            HidePopup();
         }
     }
 }

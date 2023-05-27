@@ -1,6 +1,6 @@
+using FolkVillage.Audio;
 using FolkVillage.Items;
 using System.Collections.Generic;
-using UnityEditor;
 using UnityEngine;
 
 public enum EquipmentSlot { Body = 0, Hat = 1 };
@@ -33,6 +33,7 @@ namespace FolkVillage.Player
                 }
                 _equipment[__slotIndex] = equipment;
                 OnEquipmentUpdate?.Invoke();
+                AudioManager.instance.Play("Equip");
                 return true;
             }
             return false;
@@ -55,6 +56,7 @@ namespace FolkVillage.Player
                     }
                     _equipment[__slotIndex] = __equipmentItem;
                     OnEquipmentUpdate?.Invoke();
+                    AudioManager.instance.Play("Equip");
                     return true;
                 }
                 return false;
@@ -71,6 +73,7 @@ namespace FolkVillage.Player
             {
                 _equipment[__slotIndex] = null;
                 OnEquipmentUpdate?.Invoke();
+                AudioManager.instance.Play("DeEquip");
                 return true;
             }
             return false;
@@ -83,6 +86,7 @@ namespace FolkVillage.Player
             {
                 _equipment[index] = null;
                 OnEquipmentUpdate?.Invoke();
+                AudioManager.instance.Play("DeEquip");
                 return true;
             }
             return false;
