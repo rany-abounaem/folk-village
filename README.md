@@ -18,6 +18,7 @@ After a LONG process of comparison and thinking, I picked the 3rd option.
 - Fixed some bugs
 - Added audio
 - Added Main Menu
+- EDIT: Added price tooltip for shop!
 
 ## Controls
 - Press W, A, S or D to move
@@ -30,5 +31,7 @@ After a LONG process of comparison and thinking, I picked the 3rd option.
 ## Duration
 This game was made <b> FROM SCRATCH </b> in around 39-40 hours. </br>
 <b> There are roughly 7-8 hours remaining but I will get some sleep then maybe if I have time I will try to clean code and polish the game more </b>
+
+
 
 Thank you for reading!
