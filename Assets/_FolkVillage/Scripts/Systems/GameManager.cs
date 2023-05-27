@@ -3,7 +3,6 @@ using FolkVillage.Player;
 using FolkVillage.Shops;
 using FolkVillage.UI;
 using System.Collections.Generic;
-using Unity.VisualScripting;
 using UnityEngine;
 
 namespace FolkVillage.Systems
