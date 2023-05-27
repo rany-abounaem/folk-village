@@ -28,5 +28,6 @@ After a LONG process of comparison and thinking, I picked the 3rd option.
 
 ## Duration
 This game was made in around 39-40 hours.
+<b> There are roughly 7-8 hours remaining but I will get some sleep then maybe if I have time I will try to clean code and polish the game more </b>
 
 Thank you for reading!
